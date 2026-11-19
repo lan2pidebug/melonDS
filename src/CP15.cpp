@@ -44,7 +44,7 @@ static int ReadTimingOverride(const char* name, int def)
     return (n >= 1 && n <= 254) ? n : def;
 }
 const int kDataCacheTiming = ReadTimingOverride("MELONDS_DATA_TIMING", 3);
-const int kCodeCacheTiming = ReadTimingOverride("MELONDS_CODE_TIMING", 9);
+const int kCodeCacheTiming = ReadTimingOverride("MELONDS_CODE_TIMING", 12);
 
 
 void ARMv5::CP15Reset()
