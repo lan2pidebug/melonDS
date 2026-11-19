@@ -17,6 +17,7 @@
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "NDS.h"
 #include "DSi.h"
@@ -35,8 +36,15 @@ using Platform::LogLevel;
 // this was measured to be close to hardware average
 // a value of 1 would represent a perfect cache, but that causes
 // games to run too fast, causing a number of issues
-const int kDataCacheTiming = 3;//2;
-const int kCodeCacheTiming = 9;//5;
+static int ReadTimingOverride(const char* name, int def)
+{
+    const char* v = getenv(name);
+    if (!v || !*v) return def;
+    int n = atoi(v);
+    return (n >= 1 && n <= 254) ? n : def;
+}
+const int kDataCacheTiming = ReadTimingOverride("MELONDS_DATA_TIMING", 3);
+const int kCodeCacheTiming = ReadTimingOverride("MELONDS_CODE_TIMING", 9);
 
 
 void ARMv5::CP15Reset()
