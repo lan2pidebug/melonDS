@@ -456,7 +456,7 @@ void NDS::Reset()
     }
     else
     {
-        ARM9ClockShift = 1;
+        ARM9ClockShift = 0;
         MainRAMMask = 0x3FFFFF;
     }
     // has to be called before InitTimings
